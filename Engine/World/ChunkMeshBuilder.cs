@@ -88,7 +88,6 @@ public class ChunkMeshBuilder {
 
         Vector2[] uvs = GetFaceUVs(face, u1, v1, u2, v2);
 
-        // Добавляем вершины
         for (var i = 0; i < vertices.Length; i++) {
             _vertices.Add(x + vertices[i].X);
             _vertices.Add(y + vertices[i].Y);
@@ -100,8 +99,6 @@ public class ChunkMeshBuilder {
             _normals.Add(normal.Z);
         }
 
-        // ИСПРАВЛЕННЫЕ ИНДЕКСЫ - два треугольника образуют квадрат
-        // Первый треугольник: 0-1-2, Второй: 0-2-3
         var baseIndex = _vertexCount;
         _indices.Add(baseIndex + 0);
         _indices.Add(baseIndex + 2);
@@ -113,46 +110,37 @@ public class ChunkMeshBuilder {
     }
 
     private Vector3[] GetFaceVertices(BlockFace face) {
-        // ВСЕ ВЕРШИНЫ ИДУТ ПО ЧАСОВОЙ СТРЕЛКЕ (для CW winding)
-        // или ПРОТИВ ЧАСОВОЙ (для CCW winding)
-        // Я использую ПРОТИВ ЧАСОВОЙ СТРЕЛКИ (CCW) - стандарт OpenGL
         return face switch {
-            // Верх (+Y) - смотрим сверху вниз, против часовой
             BlockFace.Top => new[] {
                 new Vector3(0, 1, 1),  // 0
                 new Vector3(0, 1, 0),  // 1
                 new Vector3(1, 1, 0),  // 2
                 new Vector3(1, 1, 1)   // 3
             },
-            // Низ (-Y) - смотрим снизу вверх, против часовой
             BlockFace.Bottom => new[] {
                 new Vector3(0, 0, 0),  // 0
                 new Vector3(0, 0, 1),  // 1
                 new Vector3(1, 0, 1),  // 2
                 new Vector3(1, 0, 0)   // 3
             },
-            // Перед (+Z) - смотрим спереди, против часовой
             BlockFace.Front => new[] {
                 new Vector3(0, 0, 1),  // 0
                 new Vector3(0, 1, 1),  // 1
                 new Vector3(1, 1, 1),  // 2
                 new Vector3(1, 0, 1)   // 3
             },
-            // Зад (-Z) - смотрим сзади, против часовой
             BlockFace.Back => new[] {
                 new Vector3(1, 0, 0),  // 0
                 new Vector3(1, 1, 0),  // 1
                 new Vector3(0, 1, 0),  // 2
                 new Vector3(0, 0, 0)   // 3
             },
-            // Право (+X) - смотрим справа, против часовой
             BlockFace.Right => new[] {
                 new Vector3(1, 0, 1),  // 0
                 new Vector3(1, 1, 1),  // 1
                 new Vector3(1, 1, 0),  // 2
                 new Vector3(1, 0, 0)   // 3
             },
-            // Лево (-X) - смотрим слева, против часовой
             BlockFace.Left => new[] {
                 new Vector3(0, 0, 0),  // 0
                 new Vector3(0, 1, 0),  // 1
@@ -164,7 +152,6 @@ public class ChunkMeshBuilder {
     }
 
     private Vector2[] GetFaceUVs(BlockFace face, float u1, float v1, float u2, float v2) {
-        // UV в том же порядке, что и вершины
         return face switch {
             BlockFace.Top => new[] {
                 new Vector2(u1, v2),  // 0

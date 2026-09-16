@@ -109,15 +109,11 @@ public class Sun : IDisposable {
     public void Render(LightingShader lightingShader, Camera camera, int screenWidth, int screenHeight) {
         if (_mesh == null || _sunShader == null) return;
 
-        // ЖЁСТКО ФИКСИРУЕМ позицию - солнце всегда над головой
         var sunPos = new Vector3(
-            0f,           // X - по центру
-            300f,         // Y - высоко в небе
-            0f            // Z - по центру
+            0f,          
+            300f,        
+            0f            
         );
-
-        // Или относительно камеры:
-        // var sunPos = camera.Position + new Vector3(0, 300, 0);
 
         var model = Matrix4.CreateTranslation(sunPos) * Matrix4.CreateScale(_size);
 

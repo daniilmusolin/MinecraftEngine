@@ -27,7 +27,6 @@ public class ChunkGenerator {
                 var worldX = chunkX * Chunk.Size + x;
                 var worldZ = chunkZ * Chunk.Size + z;
 
-                // Многослойный шум для реалистичного рельефа
                 var height = GetHeight(worldX, worldZ);
                 var terrainType = GetTerrainType(worldX, worldZ, height);
 
@@ -115,7 +114,6 @@ public class ChunkGenerator {
                 var treeNoise = _treeNoise.Fractal(worldX * 0.1f, worldZ * 0.1f, 1);
                 if (treeNoise < 0.4f) continue;
 
-                // Находим высоту поверхности
                 var height = 0;
                 for (var y = Chunk.Height - 1; y >= 0; y--) {
                     if (blocks[x, y, z] != BlockType.Air) {
@@ -134,14 +132,12 @@ public class ChunkGenerator {
     private void GenerateTree(BlockType[,,] blocks, int x, int y, int z) {
         var treeHeight = 4 + _random.Next(4);
 
-        // Ствол
         for (var i = 0; i < treeHeight; i++) {
             if (y + i < Chunk.Height) {
                 blocks[x, y + i, z] = BlockType.Wood;
             }
         }
 
-        // Крона (шарообразная)
         var radius = 2;
         for (var dx = -radius; dx <= radius; dx++) {
             for (var dz = -radius; dz <= radius; dz++) {

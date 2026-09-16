@@ -157,25 +157,24 @@ public class Game : GameWindow {
             _shader.SetFloat("timeOfDay", _timeManager.TimeOfDay);
         }
 
-        // ===== РЕНДЕРИНГ 3D МИРА =====
-        // 1. Рендерим мир
+        // Рендерим мир
         _world.Render(_shader);
 
-        // 2. Рендерим солнце и облака
+        // Рендерим солнце и облака
         _world.RenderSunAndClouds3D(_shader, _camera, Size.X, Size.Y);
 
-        // 3. Рендерим контур блока (если есть цель)
+        // Рендерим контур блока (если есть цель)
         if (_blockOutline != null && _targetBlock != null) {
             _blockOutline.Render(_targetBlock.Value, view, projection, new Vector4(0f, 0f, 0f, 0.8f));
         }
 
-        // 4. Рендерим анимацию разрушения блока
+        // Рендерим анимацию разрушения блока
         _blockBreakAnimation?.Render(Size.X, Size.Y, view, projection, _camera);
 
-        // 5. Рендерим 3D руку с предметом
+        // Рендерим 3D руку с предметом
         _inventoryRenderer?.DrawHand3D(_camera, Size.X, Size.Y);
 
-        // 6. Рендерим скин (если включен)
+        // Рендерим скин (если включен)
         if (_skinMode > 0 && _skinRenderer != null) {
             Vector3 pos = _camera.Position;
             if (_skinMode == 1) {
@@ -187,17 +186,16 @@ public class Game : GameWindow {
             _skinRenderer.Render(pos, view, projection, _skinMode == 1);
         }
 
-        // ===== РЕНДЕРИНГ 2D UI (GUI) =====
         // Отключаем DepthTest для GUI
         GL.Disable(EnableCap.DepthTest);
         GL.Disable(EnableCap.CullFace);
         GL.Enable(EnableCap.Blend);
         GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 
-        // 7. Рендерим инвентарь (2D часть)
+        // Рендерим инвентарь (2D часть)
         _inventoryRenderer?.Render(Size.X, Size.Y);
 
-        // 8. Рендерим текстовую информацию
+        // Рендерим текстовую информацию
         if (_textRenderer != null) {
             var selected = _inventory.GetSelectedItem();
             if (!selected.IsEmpty) {
@@ -218,7 +216,7 @@ public class Game : GameWindow {
             }
         }
 
-        // 9. Рендерим прицел (всегда поверх всего)
+        // Рендерим прицел (всегда поверх всего)
         _crosshair?.Render(Size.X, Size.Y, new Vector4(1f, 1f, 1f, 0.9f));
 
         // Восстанавливаем состояния OpenGL

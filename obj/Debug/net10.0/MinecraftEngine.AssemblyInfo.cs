@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MinecraftEngine")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4fb3dd9ad153474c09d7962ff8b85ba22e77dd1d")]
 [assembly: System.Reflection.AssemblyProductAttribute("MinecraftEngine")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MinecraftEngine")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

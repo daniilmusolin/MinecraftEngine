@@ -48,3 +48,4 @@ C:\Users\musol\source\repos\MinecraftEngine\MinecraftEngine\bin\Debug\net10.0\ru
 C:\Users\musol\source\repos\MinecraftEngine\MinecraftEngine\bin\Debug\net10.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll
 C:\Users\musol\source\repos\MinecraftEngine\MinecraftEngine\bin\Debug\net10.0\shaders\sun.frag
 C:\Users\musol\source\repos\MinecraftEngine\MinecraftEngine\bin\Debug\net10.0\shaders\sun.vert
+C:\Users\musol\source\repos\MinecraftEngine\MinecraftEngine\obj\Debug\net10.0\MinecraftEngine.sourcelink.json
